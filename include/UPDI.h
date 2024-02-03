@@ -26,7 +26,7 @@ void UPDI_BitDelay();
 void UPDI_HalfBitDelay();
 
 //write UPDI byte
-void UPDI_Write(uint8_t val);
+bool UPDI_Write(uint8_t val);
 
 //read UPDI byte
 bool UPDI_Read(uint8_t *val);

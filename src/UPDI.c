@@ -60,7 +60,7 @@ __attribute__((weak)) bool UPDI_Read(uint8_t *val)
 }
 
 //write UPDI byte
-__attribute__((weak)) void UPDI_Write(uint8_t val)
+__attribute__((weak)) bool UPDI_Write(uint8_t val)
 {
     UPDI_BitDelay();
     UPDI_BitDelay();
@@ -79,15 +79,12 @@ __attribute__((weak)) void UPDI_Write(uint8_t val)
     UPDI_Set(parity);
     UPDI_BitDelay();
     UPDI_Get();
+    return true;
 }
 
 //UPDI send Idle
 __attribute__((weak)) void UPDI_Idle()
 {
-    UPDI_BitDelay();
-    UPDI_BitDelay();
-    UPDI_BitDelay();
-    UPDI_Get();
     UPDI_BitDelay();
     UPDI_BitDelay();
     UPDI_BitDelay();
@@ -109,7 +106,6 @@ __attribute__((weak)) void UPDI_Break()
     UPDI_BitDelay();
     UPDI_BitDelay();
     UPDI_Set(0);
-    UPDI_BitDelay();
     UPDI_BitDelay();
     UPDI_BitDelay();
     UPDI_BitDelay();
