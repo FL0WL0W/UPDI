@@ -7,7 +7,7 @@ bool UPDI_wasLastWrite = false;
 __attribute__((weak)) void UPDI_Set(bool val) {}
 
 //get UPDI input pin
-__attribute__((weak)) bool UPDI_Get() {}
+__attribute__((weak)) bool UPDI_Get() { return 0; }
 
 //delay 1/10 bit length
 __attribute__((weak)) void UPDI_LoopDelay() {}
@@ -30,28 +30,28 @@ __attribute__((weak)) bool UPDI_Read(uint8_t *val)
         return false;
     UPDI_HalfBitDelay();
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val = b;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 1;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 2;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 3;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 4;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 5;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 6;
     UPDI_BitDelay();
-    if(b = UPDI_Get()) parity = !parity;
+    if((b = UPDI_Get())) parity = !parity;
     *val |= b << 7;
     UPDI_BitDelay();
     parity = parity == UPDI_Get();
@@ -121,7 +121,7 @@ __attribute__((weak)) void UPDI_Break()
 }
 
 //read and verify ack
-bool UPDI_ReadAck()
+__attribute__((weak)) bool UPDI_ReadAck()
 {
     uint8_t ack;
     if(!UPDI_Read(&ack)) return false;
